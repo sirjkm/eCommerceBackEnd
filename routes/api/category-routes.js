@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const findCategories = await Category.findAll({
       include: [{ model: Category }, { model: Product }],
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const findCategory = await Category.findByPk(req.params.id, {
       include: [{ model: Category }, { model: Product }],
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const categoryData = await Category.destroy({
       where: {
